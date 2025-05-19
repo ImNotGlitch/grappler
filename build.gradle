@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'com.github.imnotglitch'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://jitpack.io/' }
+}
+
+dependencies {
+    compileOnly fileTree('libs')
+
+    def lombok = 'org.projectlombok:lombok:1.18.36'
+    compileOnly 'org.jetbrains:annotations:23.0.0'
+    compileOnly lombok
+    annotationProcessor lombok
+}
+
+tasks.build.dependsOn 'shadowJar'
+
+shadowJar {
+
+}
+
+
+compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
